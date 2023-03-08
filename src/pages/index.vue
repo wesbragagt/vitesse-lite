@@ -1,6 +1,7 @@
 <script lang="ts">
 import TheInput from "@/components/TheInput.vue";
 import { ref, defineComponent } from "vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "IndexPage",
@@ -8,11 +9,17 @@ export default defineComponent({
     TheInput,
   },
   setup() {
+    const store = useStore();
     const name = ref('name');
     const go = () => {};
+    const increment = () => {
+      store.commit('increment');
+    }
     return {
+      increment,
       name,
       go,
+      storeState: store.state,
     };
   },
 });
@@ -20,31 +27,23 @@ export default defineComponent({
 
 <template>
   <div>
-    <div i-carbon-campsite text-4xl inline-block />
-    <p>
-      <a
-        rel="noreferrer"
-        href="https://github.com/antfu/vitesse-lite"
-        target="_blank"
-      >
-        Vitesse Lite
-      </a>
-    </p>
-    <p>
-      <em text-sm op75>Opinionated Vite Starter Template</em>
-    </p>
-
-    <div py-4 />
-
+    <div/>
     <TheInput
       v-model="name"
       placeholder="What's your name?"
       autocomplete="false"
       @keydown.enter="go"
     />
-
     <div>
-      <button class="bg-red-500 p-2" :disabled="!name" @click="go">Go</button>
+      <button class="bg-red-500 p-2" :disabled="!name" @click="increment">Increment</button>
     </div>
+  <pre>
+    {{JSON.stringify(storeState, undefined, 2)}}
+  </pre>
   </div>
 </template>
+<style>
+* {
+  @apply text-black;
+}
+</style>
