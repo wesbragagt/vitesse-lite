@@ -1,11 +1,23 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+import {toggleDark} from '@/composables/dark'
+export default defineComponent({
+ name: 'TheFooter' ,
+  setup(){
+    return {
+    toggleDark
+  }
+  }
+})
+</script>
 <template>
-  <nav text-xl mt-6 inline-flex gap-2>
-    <button icon-btn @click="toggleDark()">
-      <div dark:i-carbon-moon i-carbon-sun />
+  <nav>
+    <button @click="toggleDark()">
+      toggle dark
     </button>
 
     <a
-      icon-btn i-carbon-logo-github
+      class="text-red-500" 
       rel="noreferrer"
       href="https://github.com/antfu/vitesse-lite"
       target="_blank"

@@ -1,22 +1,32 @@
-<script setup lang="ts" generic="T extends any, O extends any">
-defineOptions({
-  name: 'IndexPage',
-})
+<script lang="ts">
+import TheInput from "@/components/TheInput.vue";
+import { ref, defineComponent } from "vue";
 
-const name = $ref('')
-
-const router = useRouter()
-const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
-}
+export default defineComponent({
+  name: "IndexPage",
+  components: {
+    TheInput,
+  },
+  setup() {
+    const name = ref('name');
+    const go = () => {};
+    return {
+      name,
+      go,
+    };
+  },
+});
 </script>
 
 <template>
   <div>
     <div i-carbon-campsite text-4xl inline-block />
     <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse-lite" target="_blank">
+      <a
+        rel="noreferrer"
+        href="https://github.com/antfu/vitesse-lite"
+        target="_blank"
+      >
         Vitesse Lite
       </a>
     </p>
@@ -34,13 +44,7 @@ const go = () => {
     />
 
     <div>
-      <button
-        class="m-3 text-sm btn"
-        :disabled="!name"
-        @click="go"
-      >
-        Go
-      </button>
+      <button class="bg-red-500 p-2" :disabled="!name" @click="go">Go</button>
     </div>
   </div>
 </template>
