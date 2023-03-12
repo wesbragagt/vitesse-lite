@@ -8,10 +8,19 @@ export default defineConfig({
   resolve: {
     alias: {
       "@/": `${path.resolve(__dirname, "src")}/`,
+      vue: "@vue/compat"
     },
   },
   plugins: [
-    Vue(),
+    Vue({
+      template: {
+        compilerOptions: {
+          compatConfig: {
+            MODE: 2
+          }
+        }
+      }
+    }),
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({ routeStyle: "nuxt" }),
   ],
